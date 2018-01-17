@@ -1,0 +1,80 @@
+[*]
+[*] GTKWave Analyzer v3.3.66 (w)1999-2015 BSI
+[*] Mon Jan 15 23:46:29 2018
+[*]
+[dumpfile] "/home/adumont/Robotica/Alex/Icezum/Verilog/Automaton/automaton_tb.vcd"
+[dumpfile_mtime] "Mon Jan 15 23:46:06 2018"
+[dumpfile_size] 21386
+[savefile] "/home/adumont/Robotica/Alex/Icezum/Verilog/Automaton/automaton_tb.gtkw"
+[timestart] 0
+[size] 1360 600
+[pos] 62 -1
+*-3.923964 2 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] automaton_tb.
+[treeopen] automaton_tb.myCA.
+[treeopen] automaton_tb.myCA.CA.
+[treeopen] automaton_tb.myCA.CA.automaton_cell[0].
+[treeopen] automaton_tb.myCA.CA.automaton_cell[1].
+[sst_width] 197
+[signals_width] 230
+[sst_expanded] 1
+[sst_vpaned_height] 219
+@28
+automaton_tb.clk
+automaton_tb.myCA.clk_base
+automaton_tb.myCA.INIT.clk
+automaton_tb.myCA.INIT.ini
+@800022
+automaton_tb.myCA.data[7:0]
+@29
+(0)automaton_tb.myCA.data[7:0]
+@28
+(1)automaton_tb.myCA.data[7:0]
+(2)automaton_tb.myCA.data[7:0]
+(3)automaton_tb.myCA.data[7:0]
+(4)automaton_tb.myCA.data[7:0]
+(5)automaton_tb.myCA.data[7:0]
+(6)automaton_tb.myCA.data[7:0]
+(7)automaton_tb.myCA.data[7:0]
+@1001200
+-group_end
+@200
+-C0
+@24
+automaton_tb.myCA.CA.automaton_cell[0].Bi.in[2:0]
+@28
+automaton_tb.myCA.CA.automaton_cell[1].Bi.out
+@c00022
+automaton_tb.myCA.CA.automaton_cell[1].Bi.rule[7:0]
+@28
+(0)automaton_tb.myCA.CA.automaton_cell[1].Bi.rule[7:0]
+(1)automaton_tb.myCA.CA.automaton_cell[1].Bi.rule[7:0]
+(2)automaton_tb.myCA.CA.automaton_cell[1].Bi.rule[7:0]
+(3)automaton_tb.myCA.CA.automaton_cell[1].Bi.rule[7:0]
+(4)automaton_tb.myCA.CA.automaton_cell[1].Bi.rule[7:0]
+(5)automaton_tb.myCA.CA.automaton_cell[1].Bi.rule[7:0]
+(6)automaton_tb.myCA.CA.automaton_cell[1].Bi.rule[7:0]
+(7)automaton_tb.myCA.CA.automaton_cell[1].Bi.rule[7:0]
+@1401200
+-group_end
+@200
+-C1
+@24
+automaton_tb.myCA.CA.automaton_cell[1].Bi.in[2:0]
+@28
+automaton_tb.myCA.CA.automaton_cell[1].Bi.out
+@c00028
+automaton_tb.myCA.CA.automaton_cell[1].Bi.rule[7:0]
+@28
+(0)automaton_tb.myCA.CA.automaton_cell[1].Bi.rule[7:0]
+(1)automaton_tb.myCA.CA.automaton_cell[1].Bi.rule[7:0]
+(2)automaton_tb.myCA.CA.automaton_cell[1].Bi.rule[7:0]
+(3)automaton_tb.myCA.CA.automaton_cell[1].Bi.rule[7:0]
+(4)automaton_tb.myCA.CA.automaton_cell[1].Bi.rule[7:0]
+(5)automaton_tb.myCA.CA.automaton_cell[1].Bi.rule[7:0]
+(6)automaton_tb.myCA.CA.automaton_cell[1].Bi.rule[7:0]
+(7)automaton_tb.myCA.CA.automaton_cell[1].Bi.rule[7:0]
+@1401200
+-group_end
+[pattern_trace] 1
+[pattern_trace] 0
