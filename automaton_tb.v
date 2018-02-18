@@ -1,6 +1,6 @@
 module automaton_tb();
 
-	parameter WIDTH = 128;
+	parameter WIDTH = 80;
 
     reg[7:0] count = 0;
 
@@ -19,6 +19,8 @@ module automaton_tb();
 	//-- Generador de reloj. Periodo 2 unidades
 	always #1 clk = ~clk;
 
+	integer file;
+
 	//-- Proceso al inicio
 	initial begin
 
@@ -26,14 +28,19 @@ module automaton_tb();
 		$dumpfile("automaton_tb.vcd");
 		$dumpvars(0, automaton_tb);
 
-		#1 $display("data: %b", data);
+		#1 $display("data: %b (%d)", data, count);
 
-        for (count=0; count<=250; count=count+1)
+		file = $fopen("data.out", "wb");
+		$fwrite(file, "%b\n", data);
+
+        for (count=1; count<=59; count=count+1)
         begin
             #4
-            $display("data: %b", data);
+            $display("data: %b (%d)", data, count);
+			$fwrite(file, "%b\n", data);
         end
 
+		$fclose(file);
 		# 1 $display("FIN de la simulacion");
 		$finish;
 
