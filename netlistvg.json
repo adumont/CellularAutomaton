@@ -1,0 +1,575 @@
+{
+  "creator": "Yosys 0.7+365 (git sha1 4f31cb6, clang 3.8.0-2ubuntu4 -fPIC -Os)",
+  "modules": {
+    "$paramod\\cellAutomaton\\WIDTH=8": {
+      "attributes": {
+        "src": "automaton.v:40"
+      },
+      "ports": {
+        "in": {
+          "direction": "input",
+          "bits": [ 2, 3, 4, 5, 6, 7, 8, 9 ]
+        },
+        "rule": {
+          "direction": "input",
+          "bits": [ 10, 11, 12, 13, 14, 15, 16, 17 ]
+        },
+        "out": {
+          "direction": "output",
+          "bits": [ 18, 19, 20, 21, 22, 23, 24, 25 ]
+        }
+      },
+      "cells": {
+        "automaton_cell[0].Bi": {
+          "hide_name": 0,
+          "type": "block",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "automaton.v:60"
+          },
+          "port_directions": {
+            "in": "input",
+            "out": "output",
+            "rule": "input"
+          },
+          "connections": {
+            "in": [ 3, 2, 9 ],
+            "out": [ 18 ],
+            "rule": [ 10, 11, 12, 13, 14, 15, 16, 17 ]
+          }
+        },
+        "automaton_cell[1].Bi": {
+          "hide_name": 0,
+          "type": "block",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "automaton.v:60"
+          },
+          "port_directions": {
+            "in": "input",
+            "out": "output",
+            "rule": "input"
+          },
+          "connections": {
+            "in": [ 4, 3, 2 ],
+            "out": [ 19 ],
+            "rule": [ 10, 11, 12, 13, 14, 15, 16, 17 ]
+          }
+        },
+        "automaton_cell[2].Bi": {
+          "hide_name": 0,
+          "type": "block",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "automaton.v:60"
+          },
+          "port_directions": {
+            "in": "input",
+            "out": "output",
+            "rule": "input"
+          },
+          "connections": {
+            "in": [ 5, 4, 3 ],
+            "out": [ 20 ],
+            "rule": [ 10, 11, 12, 13, 14, 15, 16, 17 ]
+          }
+        },
+        "automaton_cell[3].Bi": {
+          "hide_name": 0,
+          "type": "block",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "automaton.v:60"
+          },
+          "port_directions": {
+            "in": "input",
+            "out": "output",
+            "rule": "input"
+          },
+          "connections": {
+            "in": [ 6, 5, 4 ],
+            "out": [ 21 ],
+            "rule": [ 10, 11, 12, 13, 14, 15, 16, 17 ]
+          }
+        },
+        "automaton_cell[4].Bi": {
+          "hide_name": 0,
+          "type": "block",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "automaton.v:60"
+          },
+          "port_directions": {
+            "in": "input",
+            "out": "output",
+            "rule": "input"
+          },
+          "connections": {
+            "in": [ 7, 6, 5 ],
+            "out": [ 22 ],
+            "rule": [ 10, 11, 12, 13, 14, 15, 16, 17 ]
+          }
+        },
+        "automaton_cell[5].Bi": {
+          "hide_name": 0,
+          "type": "block",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "automaton.v:60"
+          },
+          "port_directions": {
+            "in": "input",
+            "out": "output",
+            "rule": "input"
+          },
+          "connections": {
+            "in": [ 8, 7, 6 ],
+            "out": [ 23 ],
+            "rule": [ 10, 11, 12, 13, 14, 15, 16, 17 ]
+          }
+        },
+        "automaton_cell[6].Bi": {
+          "hide_name": 0,
+          "type": "block",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "automaton.v:60"
+          },
+          "port_directions": {
+            "in": "input",
+            "out": "output",
+            "rule": "input"
+          },
+          "connections": {
+            "in": [ 9, 8, 7 ],
+            "out": [ 24 ],
+            "rule": [ 10, 11, 12, 13, 14, 15, 16, 17 ]
+          }
+        },
+        "automaton_cell[7].Bi": {
+          "hide_name": 0,
+          "type": "block",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "automaton.v:60"
+          },
+          "port_directions": {
+            "in": "input",
+            "out": "output",
+            "rule": "input"
+          },
+          "connections": {
+            "in": [ 2, 9, 8 ],
+            "out": [ 25 ],
+            "rule": [ 10, 11, 12, 13, 14, 15, 16, 17 ]
+          }
+        }
+      },
+      "netnames": {
+        "in": {
+          "hide_name": 0,
+          "bits": [ 2, 3, 4, 5, 6, 7, 8, 9 ],
+          "attributes": {
+            "src": "automaton.v:41"
+          }
+        },
+        "out": {
+          "hide_name": 0,
+          "bits": [ 18, 19, 20, 21, 22, 23, 24, 25 ],
+          "attributes": {
+            "src": "automaton.v:43"
+          }
+        },
+        "rule": {
+          "hide_name": 0,
+          "bits": [ 10, 11, 12, 13, 14, 15, 16, 17 ],
+          "attributes": {
+            "src": "automaton.v:42"
+          }
+        }
+      }
+    },
+    "$paramod\\prescaler\\N=23": {
+      "attributes": {
+        "src": "prescaler.v:10"
+      },
+      "ports": {
+        "clk_in": {
+          "direction": "input",
+          "bits": [ 2 ]
+        },
+        "clk_out": {
+          "direction": "output",
+          "bits": [ 3 ]
+        }
+      },
+      "cells": {
+        "$add$prescaler.v:25$11": {
+          "hide_name": 1,
+          "type": "$add",
+          "parameters": {
+            "A_SIGNED": 0,
+            "A_WIDTH": 23,
+            "B_SIGNED": 0,
+            "B_WIDTH": 1,
+            "Y_WIDTH": 23
+          },
+          "attributes": {
+            "src": "prescaler.v:25"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 3 ],
+            "B": [ "1" ],
+            "Y": [ 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48 ]
+          }
+        },
+        "$procdff$13": {
+          "hide_name": 1,
+          "type": "$dff",
+          "parameters": {
+            "CLK_POLARITY": 1,
+            "WIDTH": 23
+          },
+          "attributes": {
+            "src": "prescaler.v:24"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "D": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "CLK": [ 2 ],
+            "D": [ 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48 ],
+            "Q": [ 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 3 ]
+          }
+        }
+      },
+      "netnames": {
+        "$0\\count[22:0]": {
+          "hide_name": 1,
+          "bits": [ 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48 ],
+          "attributes": {
+            "src": "prescaler.v:24"
+          }
+        },
+        "clk_in": {
+          "hide_name": 0,
+          "bits": [ 2 ],
+          "attributes": {
+            "src": "prescaler.v:10"
+          }
+        },
+        "clk_out": {
+          "hide_name": 0,
+          "bits": [ 3 ],
+          "attributes": {
+            "src": "prescaler.v:10"
+          }
+        },
+        "count": {
+          "hide_name": 0,
+          "bits": [ 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 3 ],
+          "attributes": {
+            "init": 0,
+            "src": "prescaler.v:18"
+          }
+        }
+      }
+    },
+    "automaton": {
+      "attributes": {
+        "top": 1,
+        "src": "automaton.v:1"
+      },
+      "ports": {
+        "clk": {
+          "direction": "input",
+          "bits": [ 2 ]
+        },
+        "data": {
+          "direction": "output",
+          "bits": [ 3, 4, 5, 6, 7, 8, 9, 10 ]
+        }
+      },
+      "cells": {
+        "$procdff$15": {
+          "hide_name": 1,
+          "type": "$dff",
+          "parameters": {
+            "CLK_POLARITY": 1,
+            "WIDTH": 8
+          },
+          "attributes": {
+            "src": "automaton.v:35"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "D": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "CLK": [ 11 ],
+            "D": [ 12, 13, 14, 15, 16, 17, 18, 19 ],
+            "Q": [ 20, 21, 22, 23, 24, 25, 26, 27 ]
+          }
+        },
+        "$ternary$automaton.v:29$2": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": 8
+          },
+          "attributes": {
+            "src": "automaton.v:29"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ "1", "0", "0", "0", "0", "0", "0", "0" ],
+            "B": [ 20, 21, 22, 23, 24, 25, 26, 27 ],
+            "S": [ 28 ],
+            "Y": [ 3, 4, 5, 6, 7, 8, 9, 10 ]
+          }
+        },
+        "CA": {
+          "hide_name": 0,
+          "type": "$paramod\\cellAutomaton\\WIDTH=8",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "automaton.v:31"
+          },
+          "port_directions": {
+            "in": "input",
+            "out": "output",
+            "rule": "input"
+          },
+          "connections": {
+            "in": [ 3, 4, 5, 6, 7, 8, 9, 10 ],
+            "out": [ 12, 13, 14, 15, 16, 17, 18, 19 ],
+            "rule": [ "1", "0", "0", "0", "0", "0", "0", "1" ]
+          }
+        },
+        "INIT": {
+          "hide_name": 0,
+          "type": "init",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "automaton.v:21"
+          },
+          "port_directions": {
+            "clk": "input",
+            "ini": "output"
+          },
+          "connections": {
+            "clk": [ 11 ],
+            "ini": [ 28 ]
+          }
+        },
+        "PRES": {
+          "hide_name": 0,
+          "type": "$paramod\\prescaler\\N=23",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "automaton.v:17"
+          },
+          "port_directions": {
+            "clk_in": "input",
+            "clk_out": "output"
+          },
+          "connections": {
+            "clk_in": [ 2 ],
+            "clk_out": [ 11 ]
+          }
+        }
+      },
+      "netnames": {
+        "clk": {
+          "hide_name": 0,
+          "bits": [ 2 ],
+          "attributes": {
+            "src": "automaton.v:2"
+          }
+        },
+        "clk_base": {
+          "hide_name": 0,
+          "bits": [ 11 ],
+          "attributes": {
+            "src": "automaton.v:14"
+          }
+        },
+        "data": {
+          "hide_name": 0,
+          "bits": [ 3, 4, 5, 6, 7, 8, 9, 10 ],
+          "attributes": {
+            "src": "automaton.v:3"
+          }
+        },
+        "rin": {
+          "hide_name": 0,
+          "bits": [ 12, 13, 14, 15, 16, 17, 18, 19 ],
+          "attributes": {
+            "src": "automaton.v:26"
+          }
+        },
+        "rout": {
+          "hide_name": 0,
+          "bits": [ 20, 21, 22, 23, 24, 25, 26, 27 ],
+          "attributes": {
+            "src": "automaton.v:34"
+          }
+        },
+        "sel": {
+          "hide_name": 0,
+          "bits": [ 28 ],
+          "attributes": {
+            "src": "automaton.v:20"
+          }
+        }
+      }
+    },
+    "block": {
+      "attributes": {
+        "src": "block.v:1"
+      },
+      "ports": {
+        "in": {
+          "direction": "input",
+          "bits": [ 2, 3, 4 ]
+        },
+        "rule": {
+          "direction": "input",
+          "bits": [ 5, 6, 7, 8, 9, 10, 11, 12 ]
+        },
+        "out": {
+          "direction": "output",
+          "bits": [ 13 ]
+        }
+      },
+      "cells": {
+        "$shiftx$block.v:7$4": {
+          "hide_name": 1,
+          "type": "$shiftx",
+          "parameters": {
+            "A_SIGNED": 0,
+            "A_WIDTH": 8,
+            "B_SIGNED": 0,
+            "B_WIDTH": 3,
+            "Y_WIDTH": 1
+          },
+          "attributes": {
+            "src": "block.v:7"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 5, 6, 7, 8, 9, 10, 11, 12 ],
+            "B": [ 2, 3, 4 ],
+            "Y": [ 13 ]
+          }
+        }
+      },
+      "netnames": {
+        "in": {
+          "hide_name": 0,
+          "bits": [ 2, 3, 4 ],
+          "attributes": {
+            "src": "block.v:2"
+          }
+        },
+        "out": {
+          "hide_name": 0,
+          "bits": [ 13 ],
+          "attributes": {
+            "src": "block.v:5"
+          }
+        },
+        "rule": {
+          "hide_name": 0,
+          "bits": [ 5, 6, 7, 8, 9, 10, 11, 12 ],
+          "attributes": {
+            "src": "block.v:3"
+          }
+        }
+      }
+    },
+    "init": {
+      "attributes": {
+        "src": "init.v:2"
+      },
+      "ports": {
+        "clk": {
+          "direction": "input",
+          "bits": [ 2 ]
+        },
+        "ini": {
+          "direction": "output",
+          "bits": [ 3 ]
+        }
+      },
+      "cells": {
+        "$procdff$14": {
+          "hide_name": 1,
+          "type": "$dff",
+          "parameters": {
+            "CLK_POLARITY": 1,
+            "WIDTH": 1
+          },
+          "attributes": {
+            "src": "init.v:9"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "D": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "CLK": [ 2 ],
+            "D": [ "1" ],
+            "Q": [ 3 ]
+          }
+        }
+      },
+      "netnames": {
+        "clk": {
+          "hide_name": 0,
+          "bits": [ 2 ],
+          "attributes": {
+            "src": "init.v:2"
+          }
+        },
+        "ini": {
+          "hide_name": 0,
+          "bits": [ 3 ],
+          "attributes": {
+            "init": 0,
+            "src": "init.v:2"
+          }
+        }
+      }
+    }
+  }
+}
