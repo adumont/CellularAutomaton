@@ -21,7 +21,7 @@ module image (
   // end
 
   // Read Rom Logic
-  always @(negedge clk) begin
+  always @(posedge clk) begin
     data <= rom[row][col];
   end
 

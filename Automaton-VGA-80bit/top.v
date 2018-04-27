@@ -49,15 +49,15 @@ module top (
         .data( pixel_on ),
         // write ports
         //.clkW( px_clk ), // NOT NEEDED ANY MORE?
-        .rowW( row2 ),
-        .dataW( data2 )
+        .rowW( row ),
+        .dataW( data )
     );
 
-    assign rgb = {pixel_on,pixel_on,pixel_on};
+    assign rgb = activevideo ? {pixel_on,pixel_on,pixel_on} : 3'b000;
 
-    parameter N = 20; // for the prescaler
+    parameter N = 19; // for the prescaler
     parameter SEED = 41'b10000000000000000000000000000000000000000; // seed for first line
-    parameter RULE = 126;
+    parameter RULE = 30;
 
     //-- Reloj principal (prescalado)
     wire clk_base;
@@ -93,27 +93,13 @@ module top (
 
     //-- Registro R de WIDTH bits
     reg [79:0] rout;
-    reg [6:0] row = 1; // TODO: is the 1 synthesized or ignored?
+    reg [6:0] row = 0; // TODO: is the 1 synthesized or ignored?
     
     always @(posedge(clk_base))
     begin
         // TODO: for some reason, if I start at row 1 ( ? 1 : ), image stay stable... Why is that?
-        row <= (row == 59) ? 1 : ( row + 1 );
+        row <= (row == 59) ? 0 : ( row + 1 );
         rout <= rin; // Pasamos la salida del Cellular Automaton a la salida del registro en cada positive edge
     end
-
-    // Double FF to cross clock domain from clk_base (slow) -> px_clk (fast)
-    reg [79:0] data1, data2;
-    reg [6:0] row1,row2 = 0;
-
-    always @(posedge(px_clk))
-    begin
-        row1 <= row;
-        row2 <= row1;
-
-        data1 <= data;
-        data2 <= data1;
-    end
-
 
 endmodule
