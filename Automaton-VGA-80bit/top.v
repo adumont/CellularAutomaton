@@ -3,26 +3,25 @@
 // check connections to VGA adapter on https://github.com/Obijuan/MonsterLED/wiki
 
 module top (
-            input  wire       clk,       // System clock.
+        input  wire       clk,    // System clock.
 
-            output wire       hsync,     // Horizontal sync out signal (pin 13 male monitor).
-            output wire       vsync,     // Vertical sync out signal (pin 14 male monitor).
-            output wire [2:0] rgb,       // Red/Green/Blue VGA signal (pin 1 male monitor).
+        output wire       hsync,  // Horizontal sync out signal
+        output wire       vsync,  // Vertical sync out signal
+        output wire [2:0] rgb,    // Red/Green/Blue VGA signal
 
-            input  wire       sw1,       // board switch 1
-            input  wire       sw2,       // board switch 2
-            output wire [7:0] leds       // board leds
-        );
-
-    // wires for current pixel
-    wire [9:0] x, y;
+        input  wire       sw1,    // board button 1
+        input  wire       sw2,    // board button 2
+        output wire [7:0] leds    // board leds
+    );
 
     // avoid warning if we don't use led
     assign leds = 8'b 0000_0000;
 
-    // Signals from VGA controller.
-    wire activevideo;
+    // Signals from VGA sync
     wire px_clk;
+    wire [9:0] x, y;
+    wire activevideo;
+    wire hsync1, vsync1;
 
     // Instanciate 'vga_controller' module.
     vga_sync vga_sync0 (
@@ -39,18 +38,20 @@ module top (
         .px_clk(px_clk)             // Pixel clock
     );
 
-    wire hsync1, vsync1;
-    wire hsync2, vsync2;
+    // Stage 1
+    // - we get 'pixel_on' from BRAM (is pixel on?)
+    // - we buffer hsync/vsync though a register
 
     // buffer hsync/vsync for 1 clock cycle
+    wire hsync2, vsync2;
     register #(.W(2)) reg1(
         .clk( px_clk ),
         .in(  {hsync1,vsync1} ),
         .out( {hsync2,vsync2} )
     );
 
-    wire pixel_on;
 
+    wire pixel_on;
     image image0 (
         // read ports
         .clk( px_clk ),
@@ -66,12 +67,21 @@ module top (
     wire [2:0] rgb2;
     assign rgb2 = activevideo ? {pixel_on, pixel_on, pixel_on} : 3'b000;
 
+    // Stage 2
+    // - we buffer hsync/vsync and rgb signal though a register to keep them synchronized on px_clk posedge
+
     // sync hsync/vsync with rgb signal on px_clock posedge
     register #(.W(5)) reg2(
         .clk( px_clk ),
         .in(  {hsync2, vsync2, rgb2} ),
         .out( {hsync , vsync , rgb } )
     );
+
+    ///////////////////////////////////////////////////
+    // Automaton's part of the circuit                 //
+    ///////////////////////////////////////////////////
+    // - clock is prescaled from px_clk --> clk_base
+    // - updates BRAM
 
     parameter N = 19; // for the prescaler
     parameter SEED = 41'b10000000000000000000000000000000000000000; // seed for first line
