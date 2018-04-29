@@ -10,15 +10,15 @@ module top (
             output wire [2:0] rgb,       // Red/Green/Blue VGA signal (pin 1 male monitor).
 
             input  wire       sw1,       // board switch 1
-            input  wire       sw2       // board switch 2
-            //output wire [7:0] leds       // board leds
+            input  wire       sw2,       // board switch 2
+            output wire [7:0] leds       // board leds
         );
 
     // wires for current pixel
     wire [9:0] x, y;
 
     // avoid warning if we don't use led
-    //assign leds = 8'b0;
+    assign leds = 8'b 0000_0000;
 
     // Signals from VGA controller.
     wire activevideo;
@@ -27,16 +27,26 @@ module top (
     // Instanciate 'vga_controller' module.
     vga_sync vga_sync0 (
         // input:
-        .clk(clk),              // Input clock: 12MHz.
+        .clk(clk),                  // Input clock: 12MHz
+
         // output:
-        .hsync(hsync),            // Horizontal sync out
-        .vsync(vsync),            // Vertical sync out
+        .hsync(hsync1),              // Horizontal sync out
+        .vsync(vsync1),              // Vertical sync out
 
-        .x_px(x),             // X position for actual pixel
-        .y_px(y),             // Y position for actual pixel
-        .activevideo(activevideo),      // Video active
+        .x_px(x),                   // X position for actual pixel
+        .y_px(y),                   // Y position for actual pixel
+        .activevideo(activevideo),  // Video active
+        .px_clk(px_clk)             // Pixel clock
+    );
 
-        .px_clk(px_clk)            // Pixel clock
+    wire hsync1, vsync1;
+    wire hsync2, vsync2;
+
+    // buffer hsync/vsync for 1 clock cycle
+    register #(.W(2)) reg1(
+        .clk( px_clk ),
+        .in(  {hsync1,vsync1} ),
+        .out( {hsync2,vsync2} )
     );
 
     wire pixel_on;
@@ -53,7 +63,15 @@ module top (
         .dataW( data )
     );
 
-    assign rgb = activevideo ? {pixel_on,pixel_on,pixel_on} : 3'b000;
+    wire [2:0] rgb2;
+    assign rgb2 = activevideo ? {pixel_on, pixel_on, pixel_on} : 3'b000;
+
+    // sync hsync/vsync with rgb signal on px_clock posedge
+    register #(.W(5)) reg2(
+        .clk( px_clk ),
+        .in(  {hsync2, vsync2, rgb2} ),
+        .out( {hsync , vsync , rgb } )
+    );
 
     parameter N = 19; // for the prescaler
     parameter SEED = 41'b10000000000000000000000000000000000000000; // seed for first line
@@ -93,11 +111,10 @@ module top (
 
     //-- Registro R de WIDTH bits
     reg [79:0] rout;
-    reg [6:0] row = 0; // TODO: is the 1 synthesized or ignored?
+    reg [6:0] row = 0;
     
     always @(posedge(clk_base))
     begin
-        // TODO: for some reason, if I start at row 1 ( ? 1 : ), image stay stable... Why is that?
         row <= (row == 59) ? 0 : ( row + 1 );
         rout <= rin; // Pasamos la salida del Cellular Automaton a la salida del registro en cada positive edge
     end

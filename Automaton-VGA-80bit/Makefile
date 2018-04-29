@@ -4,7 +4,13 @@ ifndef $(MODULE)
 	MODULE=top
 endif
 ifeq ($(MODULE), top)
-	DEPS=automaton.v image.v prescaler.v init.v vga_sync.v
+  DEPS:=\
+    automaton.v \
+    image.v \
+    prescaler.v \
+    register.v \
+    init.v \
+    vga_sync.v
 endif
 
 ifndef $(MEMORY)
