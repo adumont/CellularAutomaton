@@ -2,7 +2,7 @@
 
 module image (
     // Read ports:
-    input clk,
+    input wire clk,
     input wire [6:0] row,
     input wire [6:0] col,
     output reg data,
