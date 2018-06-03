@@ -3,6 +3,7 @@
 ifndef $(MODULE)
 	MODULE=top
 endif
+
 ifeq ($(MODULE), top)
   DEPS:=\
     automaton.v \
@@ -16,6 +17,8 @@ endif
 ifndef $(MEMORY)
 	MEMORY="1k"
 endif
+
+YOSYSOPT:=-retime -abc2
 
 all: bin svg sim
 
@@ -32,7 +35,7 @@ $(MODULE)_tb.vcd: $(MODULE).v $(DEPS) $(MODULE)_tb.v
 
 $(MODULE).bin: $(MODULE).pcf $(MODULE).v $(DEPS)
 	
-	yosys -p "synth_ice40 -blif $(MODULE).blif" $(MODULE).v $(DEPS)
+	yosys -p "synth_ice40 -blif $(MODULE).blif $(YOSYSOPT)" -q $(MODULE).v $(DEPS)
 	
 	arachne-pnr -d $(MEMORY) -p $(MODULE).pcf $(MODULE).blif -o $(MODULE).pnr
 	
