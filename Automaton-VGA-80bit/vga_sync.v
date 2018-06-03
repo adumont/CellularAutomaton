@@ -14,24 +14,24 @@
 // Revision 0.03 - Solved some mistakes.
 // Revision 0.04 - Change for 640x480@72Hz and output signals 'activevideo'
 //                 and 'px_clk'.
+// Revision 0.0x - changed by @adumont, hsync,vsync,activevideo are delayed one clock cycle
+//                 to be syncronized with x_px, y_px
 //
 // Additional Comments:
 //
 //////////////////////////////////////////////////////////////////////////////////
-`default_nettype none
-
 module vga_sync (
             // inputs
-            input wire       clk,           // Input clock: 12MHz
+            input wire        clk,           // Input clock: 12MHz
             // ouputs
-            output wire       hsync,         // Horizontal sync out
-            output wire       vsync,         // Vertical sync out
+            output reg        hsync,         // Horizontal sync out
+            output reg        vsync,         // Vertical sync out
 
-            output reg [9:0] x_px,          // X position for actual pixel.
-            output reg [9:0] y_px,          // Y position for actual pixel.
-            output wire      activevideo,
+            output reg  [9:0] x_px,          // X position for actual pixel.
+            output reg  [9:0] y_px,          // Y position for actual pixel.
+            output reg        activevideo,
 
-            output wire      px_clk
+            output wire       px_clk
          );
 
     // Generated values for pixel clock of 31.5Mhz and 72Hz frame frecuency.
@@ -53,20 +53,27 @@ module vga_sync (
     //
 	// Pixel clock.
 
-    SB_PLL40_CORE #(.FEEDBACK_PATH("SIMPLE"),
-                    .PLLOUT_SELECT("GENCLK"),
-                    .DIVR(4'b0000),
-                    .DIVF(7'b1010011),
-                    .DIVQ(3'b101),
-                    .FILTER_RANGE(3'b001)
-            )
-            uut
-            (
-                    .REFERENCECLK(clk),
-                    .PLLOUTCORE(px_clk),
-                    .RESETB(1'b1),
-                    .BYPASS(1'b0)
-              );
+
+    `ifndef SYNTHESIS
+    // SIMULATION
+        assign px_clk = clk;
+    `else
+    // SYNTHESIS
+        SB_PLL40_CORE #(.FEEDBACK_PATH("SIMPLE"),
+                        .PLLOUT_SELECT("GENCLK"),
+                        .DIVR(4'b0000),
+                        .DIVF(7'b1010011),
+                        .DIVQ(3'b101),
+                        .FILTER_RANGE(3'b001)
+                )
+                uut
+                (
+                        .REFERENCECLK(clk),
+                        .PLLOUTCORE(px_clk),
+                        .RESETB(1'b1),
+                        .BYPASS(1'b0)
+                    );
+    `endif
 
     /*
     http://www.epanorama.net/faq/vga2rgb/calc.html
@@ -131,15 +138,16 @@ module vga_sync (
 
     // Generate sync pulses (active low) and active video.
 
-    assign hsync = (hc >= hfp && hc < hfp + hpulse) ? 0:1;
-    assign vsync = (vc >= vfp && vc < vfp + vpulse) ? 0:1;
-    assign activevideo = (hc >= blackH && vc >= blackV) ? 1:0;
+    wire hsync0, vsync0, activevideo0;
 
-    // Generate color.
+    assign hsync0 = (hc >= hfp && hc < hfp + hpulse) ? 0:1;
+    assign vsync0 = (vc >= vfp && vc < vfp + vpulse) ? 0:1;
+    assign activevideo0 = (hc >= blackH && vc >= blackV) ? 1:0;
+
     always @(posedge px_clk)
     begin
         // First check if we are within vertical active video range.
-        if (activevideo)
+        if (activevideo0)
         begin
             x_px <= hc - blackH;
             y_px <= vc - blackV;
@@ -150,5 +158,8 @@ module vga_sync (
             x_px <= 0;
             y_px <= 0;
         end
+        hsync <= hsync0;
+        vsync <= vsync0;
+        activevideo <= activevideo0;
      end
  endmodule
