@@ -20,8 +20,7 @@ module top (
     // Signals from VGA sync
     wire px_clk;
     wire [9:0] x, y;
-    wire activevideo;
-    wire hsync1, vsync1;
+    wire hsync1, vsync1, activevideo1;
 
     // Instanciate 'vga_controller' module.
     vga_sync vga_sync0 (
@@ -34,7 +33,7 @@ module top (
 
         .x_px(x),                   // X position for actual pixel
         .y_px(y),                   // Y position for actual pixel
-        .activevideo(activevideo),  // Video active
+        .activevideo(activevideo1),  // Video active
         .px_clk(px_clk)             // Pixel clock
     );
 
@@ -43,13 +42,15 @@ module top (
     // - we buffer hsync/vsync though a register
 
     // buffer hsync/vsync for 1 clock cycle
-    wire hsync2, vsync2;
-    register #(.W(2)) reg1(
+    wire hsync2, vsync2, activevideo2;
+    register #(.W(3)) reg1(
         .clk( px_clk ),
-        .in(  {hsync1,vsync1} ),
-        .out( {hsync2,vsync2} )
+        .in(  {hsync1, vsync1, activevideo1} ),
+        .out( {hsync2, vsync2, activevideo2} )
     );
 
+    reg [6:0] row = 0;
+    wire [79:0] data;
 
     wire pixel_on;
     image image0 (
@@ -65,7 +66,7 @@ module top (
     );
 
     wire [2:0] rgb2;
-    assign rgb2 = activevideo ? {pixel_on, pixel_on, pixel_on} : 3'b000;
+    assign rgb2 = activevideo2 ? {pixel_on, pixel_on, pixel_on} : 3'b000;
 
     // Stage 2
     // - we buffer hsync/vsync and rgb signal though a register to keep them synchronized on px_clk posedge
@@ -112,7 +113,6 @@ module top (
 
     //-- Cable salida del cellAutomaton (CA) al registro R
     wire [79:0] rin;
-    wire [79:0] data;
 
     // mux2-1 (saca SEED si sel=0, sino la salida del registro (detras del Cellular Automaton))
     assign data = (sel == 0) ? SEED : rout;
@@ -121,7 +121,6 @@ module top (
 
     //-- Registro R de WIDTH bits
     reg [79:0] rout;
-    reg [6:0] row = 0;
     
     always @(posedge(clk_base))
     begin
