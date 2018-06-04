@@ -35,7 +35,9 @@ $(MODULE)_tb.vcd: $(MODULE).v $(DEPS) $(MODULE)_tb.v
 
 $(MODULE).bin: $(MODULE).pcf $(MODULE).v $(DEPS)
 	
-	yosys -p "synth_ice40 -blif $(MODULE).blif $(YOSYSOPT)" -q $(MODULE).v $(DEPS)
+	yosys -p "synth_ice40 -blif $(MODULE).blif $(YOSYSOPT)" \
+	   -q $(MODULE).v $(DEPS) -l $(MODULE).log
+
 	
 	arachne-pnr -d $(MEMORY) -p $(MODULE).pcf $(MODULE).blif -o $(MODULE).pnr
 	
