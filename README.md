@@ -4,6 +4,8 @@ This project includes several implementations of a Cellular Automaton.
 
 See in each subfolder for more information.
 
+Twitter moment: [FPGA Project 2 - Cellular Automaton to VGA / Twitter](https://twitter.com/i/events/955588183252701184)
+
 ## Logisim
 
 Working 8 bit Cellular Automaton, with output to LEDs, in Logisim:
